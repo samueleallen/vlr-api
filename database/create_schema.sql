@@ -91,12 +91,12 @@ CREATE TABLE Roster (
 CREATE TABLE Matches (
     match_id VARCHAR(128),
     date_played DATE NOT NULL,
-    winner_team_id INT,
-    loser_team_id INT,
+    team1_id INT,
+    team2_id INT,
     t1_won BOOLEAN,
     PRIMARY KEY (match_id),
-    FOREIGN KEY (winner_team_id) REFERENCES Teams (team_id),
-    FOREIGN KEY (loser_team_id) REFERENCES Teams (team_id)
+    FOREIGN KEY (team1_id) REFERENCES Teams (team_id),
+    FOREIGN KEY (team2_id) REFERENCES Teams (team_id)
 );
 
 CREATE TABLE MatchStats (
@@ -104,8 +104,6 @@ CREATE TABLE MatchStats (
     match_id VARCHAR(128) NOT NULL,
     team_id INT NOT NULL,
     is_team1 BOOLEAN NOT NULL,
-
-    -- Stats columns
     r2 DECIMAL(5,4),
     acs DECIMAL(5,1),
     kills DECIMAL(5,2),
@@ -119,9 +117,7 @@ CREATE TABLE MatchStats (
     fd DECIMAL(5,2),
     fk_fd_diff DECIMAL(5,2),
 
-    -- Composite unique constraint to ensure just one stat per team per match
-    UNIQUE (match_id, team_id),
-    
+    UNIQUE (match_id, team_id), -- constraint to ensure just one stat per team per match
     PRIMARY KEY (matchstats_id),
     FOREIGN KEY (match_id) REFERENCES Matches (match_id),
     FOREIGN KEY (team_id) REFERENCES Teams (team_id)

@@ -1,4 +1,0 @@
-# UNCOMMENT IF TRYING TO USE PYTHON SCRIPTS FOR DATA IMPORTS
-# services:
-#   api:
-#     command: tail -f /dev/null

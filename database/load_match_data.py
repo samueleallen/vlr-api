@@ -93,7 +93,7 @@ def load_normalized_data():
                         loser_id = team1_id
                     
                     match_q = f"""
-                    INSERT INTO Matches (match_id, date_played, winner_team_id, loser_team_id, t1_won)
+                    INSERT INTO Matches (match_id, date_played, team1_id, team2_id, t1_won)
                     VALUES (%s, %s, %s, %s, %s)
                     ON CONFLICT (match_id) DO NOTHING;
                     """
